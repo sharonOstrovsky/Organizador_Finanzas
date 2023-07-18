@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import com.example.organizador.databinding.FragmentNewExpenseBinding
 import com.example.organizador.data.model.ExpenseItem
 import com.example.organizador.ui.viewmodel.ExpenseViewModel
@@ -55,42 +54,21 @@ class NewExpense(var expenseItem: ExpenseItem?) : BottomSheetDialogFragment(){
         val description = binding.descriptionEditText.text.toString()
         val price = binding.priceEditText.text.toString().toDouble()
 
+
         if(expenseItem == null){
             val newExpense = ExpenseItem(description, price)
             expenseViewModel.addExpenseItem(newExpense)
+
         }else{
-            expenseViewModel.updateExpenseItem(description, price, expenseItem!!.id)
+            expenseItem!!.description = description
+            expenseItem!!.price = price
+            expenseViewModel.updateExpenseItem(expenseItem!!)
         }
         binding.descriptionEditText.setText("")
         binding.priceEditText.setText("")
         dismiss()
     }
 
-/*
-    fun agregarGasto(){
 
-
-            val description = binding.descriptionEditText.text.toString()
-            val price = binding.priceEditText.text.toString().toDoubleOrNull()
-
-            if (description.isNotEmpty() && price != null) {
-                val newExpense = Expense(description, price)
-                expenseList.add(newExpense)
-                clearInputFields()
-                binding.recyclerView.adapter?.notifyDataSetChanged()
-
-            } else {
-                Toast.makeText(this, "Ingrese una descripción y un precio válido", Toast.LENGTH_SHORT).show()
-            }
-
-    }
-
-    private fun clearInputFields() {
-        binding.descriptionEditText.text.clear()
-        binding.priceEditText.text.clear()
-        Toast.makeText(this, "GUARDADO", Toast.LENGTH_SHORT).show()
-    }
-
- */
 }
 

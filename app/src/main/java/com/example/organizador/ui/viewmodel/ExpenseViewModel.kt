@@ -1,36 +1,39 @@
 package com.example.organizador.ui.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.example.organizador.data.model.ExpenseItem
+import com.example.organizador.data.model.TaskItem
+import com.example.organizador.data.network.OrganizadorRepository
 import com.example.organizador.ui.views.NewExpense
+import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.util.UUID
 
-class ExpenseViewModel: ViewModel() {
+class ExpenseViewModel(
+    private val repository: OrganizadorRepository
+): ViewModel() {
 
-    var expenseItems = MutableLiveData<MutableList<ExpenseItem>?>()
+    var expenseItems : LiveData<List<ExpenseItem>> = repository.allExpenseItem.asLiveData()
 
-    init {
-        expenseItems.value = mutableListOf()
+
+    fun addExpenseItem(newExpense: ExpenseItem)= viewModelScope.launch{
+        repository.insertExpenseItem(newExpense)
     }
 
-    fun addExpenseItem(newExpense: ExpenseItem){
-        val list = expenseItems.value
-        list!!.add(newExpense)
-        expenseItems.postValue(list)
+    fun updateExpenseItem(expenseItem: ExpenseItem)= viewModelScope.launch{
+        repository.updateExpenseItem(expenseItem)
+    }
+    fun setExpenseItem(expenseItem: ExpenseItem)= viewModelScope.launch{
+        repository.updateExpenseItem(expenseItem)
     }
 
-    fun updateExpenseItem(description: String, price: Double, id: UUID){
-        val list = expenseItems.value
-        val expense = list!!.find { it.id == id }!!
-        expense.description = description
-        expense.price = price
-    }
+}
 
-    fun setExpenseItem(expenseItem: ExpenseItem){
-        val list = expenseItems.value
-        val expense = list!!.find { it.id == expenseItem.id }!!
-        expenseItems.postValue(list)
+class ExpenseItemModelFactory(private val repository: OrganizadorRepository): ViewModelProvider.Factory{
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(ExpenseViewModel::class.java)){
+            return ExpenseViewModel(repository) as T
+        }
+        throw java.lang.IllegalArgumentException("Unkown class for View Model")
     }
-
 }
