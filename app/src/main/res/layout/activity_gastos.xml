@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3A3A3A"
-    tools:context=".GastosActivity">
+    tools:context=".ui.views.GastosActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,57 +15,38 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="16dp"
             android:text="Mis Gastos"
-            android:textSize="24sp"
-            android:textStyle="bold"
             android:textColor="@color/white"
-            android:padding="16dp"/>
-
-        <!-- Lista de gastos -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:textColorHint="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:padding="16dp"/>
-
-        <!-- Formulario para agregar gastos -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <EditText
-                android:id="@+id/descriptionEditText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Descripción"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:inputType="text"/>
-
-            <EditText
-                android:id="@+id/priceEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Precio"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:inputType="numberDecimal"/>
-
-            <Button
-                android:id="@+id/addButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Agregar"/>
-        </LinearLayout>
-
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
+    <!-- Lista de gastos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/design_default_color_background"
+        />
 
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:padding="5dp"
+        android:text="New Expense"
+        android:textColor="?colorOnPrimary"
+        app:icon="@drawable/ic_baseline_add_24"
+        app:iconTint="?colorOnPrimary" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

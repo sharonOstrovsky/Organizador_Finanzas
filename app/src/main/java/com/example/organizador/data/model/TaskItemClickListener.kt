@@ -1,4 +1,6 @@
-package com.example.organizador
+package com.example.organizador.data.model
+
+import com.example.organizador.data.model.TaskItem
 
 interface TaskItemClickListener {
     fun editTaskItem(taskItem: TaskItem)

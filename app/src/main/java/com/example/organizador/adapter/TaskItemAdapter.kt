@@ -1,10 +1,12 @@
-package com.example.organizador
+package com.example.organizador.adapter
 
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.organizador.data.model.TaskItem
+import com.example.organizador.data.model.TaskItemClickListener
 import com.example.organizador.databinding.TaskItemCellBinding
 
 class TaskItemAdapter(

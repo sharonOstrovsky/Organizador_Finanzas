@@ -1,4 +1,4 @@
-package com.example.organizador
+package com.example.organizador.ui.views
 
 import android.app.TimePickerDialog
 import android.os.Build
@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import com.example.organizador.databinding.FragmentNewTaskSheetBinding
+import com.example.organizador.data.model.TaskItem
+import com.example.organizador.ui.viewmodel.TaskViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalTime
 

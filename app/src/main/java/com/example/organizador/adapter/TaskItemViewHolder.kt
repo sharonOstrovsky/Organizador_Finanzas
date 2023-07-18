@@ -1,4 +1,4 @@
-package com.example.organizador
+package com.example.organizador.adapter
 
 import android.content.Context
 import android.graphics.Paint
@@ -6,6 +6,8 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.organizador.databinding.TaskItemCellBinding
+import com.example.organizador.data.model.TaskItem
+import com.example.organizador.data.model.TaskItemClickListener
 import java.time.format.DateTimeFormatter
 
 class TaskItemViewHolder(

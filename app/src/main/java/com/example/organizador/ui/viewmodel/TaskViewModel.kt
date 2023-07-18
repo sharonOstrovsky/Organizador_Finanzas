@@ -1,7 +1,8 @@
-package com.example.organizador
+package com.example.organizador.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.organizador.data.model.TaskItem
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.UUID

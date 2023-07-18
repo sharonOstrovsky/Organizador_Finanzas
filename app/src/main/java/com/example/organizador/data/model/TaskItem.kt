@@ -1,7 +1,8 @@
-package com.example.organizador
+package com.example.organizador.data.model
 
 import android.content.Context
 import androidx.core.content.ContextCompat
+import com.example.organizador.R
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*

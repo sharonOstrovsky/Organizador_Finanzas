@@ -12,16 +12,19 @@
         android:theme="@style/Theme.Organizador"
         tools:targetApi="31">
         <activity
-            android:name=".NewTaskSheet"
+            android:name=".ui.views.NewExpense"
             android:exported="false" />
         <activity
-            android:name=".ToDoListActivity"
+            android:name=".ui.views.NewTaskSheet"
             android:exported="false" />
         <activity
-            android:name=".GastosActivity"
+            android:name=".ui.views.ToDoListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.views.GastosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.views.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

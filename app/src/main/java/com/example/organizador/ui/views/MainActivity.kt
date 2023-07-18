@@ -1,4 +1,4 @@
-package com.example.organizador
+package com.example.organizador.ui.views
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

@@ -1,10 +1,14 @@
-package com.example.organizador
+package com.example.organizador.ui.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.organizador.adapter.TaskItemAdapter
 import com.example.organizador.databinding.ActivityToDoListBinding
+import com.example.organizador.data.model.TaskItem
+import com.example.organizador.data.model.TaskItemClickListener
+import com.example.organizador.ui.viewmodel.TaskViewModel
 
 class ToDoListActivity : AppCompatActivity(), TaskItemClickListener {
 
