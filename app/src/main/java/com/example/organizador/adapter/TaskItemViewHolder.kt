@@ -18,14 +18,19 @@ class TaskItemViewHolder(
 
     @RequiresApi(Build.VERSION_CODES.O)
     val timeFormat = DateTimeFormatter.ofPattern("HH:mm")
+    @RequiresApi(Build.VERSION_CODES.O)
+    val dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun bindTaskItem(taskItem: TaskItem){
         binding.name.text = taskItem.name
-
+        binding.description.text = taskItem.desc
         if(taskItem.isCompleted()){
             binding.name.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             binding.dueTime.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            binding.dueDate.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            binding.description.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            binding.descriptionTitle.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         }
 
         binding.completeButton.setImageResource(taskItem.imageResource())
@@ -37,11 +42,19 @@ class TaskItemViewHolder(
         binding.taskCellContainer.setOnClickListener {
             clickListener.editTaskItem(taskItem)
         }
+        binding.deleteButton.setOnClickListener {
+            clickListener.deleteTaskItem(taskItem)
+        }
 
         if(taskItem.dueTime() != null){
             binding.dueTime.text = timeFormat.format(taskItem.dueTime())
         }else{
             binding.dueTime.text = ""
+        }
+        if(taskItem.dueDate() != null){
+            binding.dueDate.text = dateFormat.format(taskItem.dueDate())
+        }else{
+            binding.dueDate.text = ""
         }
 
     }

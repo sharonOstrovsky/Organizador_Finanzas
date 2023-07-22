@@ -1,5 +1,6 @@
 package com.example.organizador.ui.views
 
+import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +14,7 @@ import com.example.organizador.databinding.FragmentNewTaskSheetBinding
 import com.example.organizador.data.model.TaskItem
 import com.example.organizador.ui.viewmodel.TaskViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import java.time.LocalDate
 import java.time.LocalTime
 
 class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment()
@@ -20,6 +22,7 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment()
     private lateinit var binding: FragmentNewTaskSheetBinding
     private lateinit var taskViewModel: TaskViewModel
     private var dueTime: LocalTime? = null
+    private var dueDate: LocalDate? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,6 +39,10 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment()
                 dueTime = taskItem!!.dueTime()!!
                 updateTimeButtonText()
             }
+            if(taskItem!!.dueDate() != null){
+                dueDate = taskItem!!.dueDate()!!
+                updateDateButtonText()
+            }
         }
         else
         {
@@ -49,6 +56,34 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment()
         binding.timePickerButton.setOnClickListener {
             openTimePicker()
         }
+        binding.datePickerButton.setOnClickListener {
+            openDatePicker()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun openDatePicker() {
+        val currentDate = LocalDate.now()
+        val year = currentDate.year
+        val month = currentDate.monthValue - 1 // El DatePickerDialog usa meses indexados desde 0
+        val day = currentDate.dayOfMonth
+        if (dueDate== null)
+            dueDate = LocalDate.now()
+
+        val listener = DatePickerDialog.OnDateSetListener { _, selectedYear, selectedMonth, selectedDay ->
+            dueDate = LocalDate.of(selectedYear, selectedMonth + 1, selectedDay) // Vuelve a 1-based
+            updateDateButtonText()
+        }
+
+        val dialog = DatePickerDialog(requireContext(), listener, year, month, day)
+        dialog.setTitle("Select Due Date")
+        dialog.show()
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun updateDateButtonText() {
+        binding.datePickerButton.text = String.format("%02d/%02d/%04d", dueDate!!.dayOfMonth, dueDate!!.monthValue, dueDate!!.year)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -82,9 +117,10 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment()
         val name = binding.name.text.toString()
         val desc = binding.desc.text.toString()
         val dueTimeString = if(dueTime == null) null else TaskItem.timeFormatter.format(dueTime)
+        val dueDateString = if(dueDate == null) null else TaskItem.dateFormatter.format(dueDate)
         if(taskItem == null)
         {
-            val newTask = TaskItem(name,desc,dueTimeString,null)
+            val newTask = TaskItem(name,desc,dueTimeString,dueDateString,null)
             taskViewModel.addTaskItem(newTask)
         }
         else
@@ -92,6 +128,7 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment()
             taskItem!!.name = name
             taskItem!!.desc = desc
             taskItem!!.dueTimeString = dueTimeString
+            taskItem!!.dueDateString = dueDateString
             taskViewModel.updateTaskItem(taskItem!!)
         }
 

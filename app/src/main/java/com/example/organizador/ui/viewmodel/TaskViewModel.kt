@@ -16,12 +16,16 @@ class TaskViewModel(
     var taskItems : LiveData<List<TaskItem>> = repository.allTaskItem.asLiveData()
 
 
+
     fun addTaskItem(newTask: TaskItem) = viewModelScope.launch{
         repository.insertTaskItem(newTask)
     }
 
     fun updateTaskItem(taskItem: TaskItem) = viewModelScope.launch{
         repository.updateTaskItem(taskItem)
+    }
+    fun deleteTaskItem(taskItem: TaskItem) = viewModelScope.launch {
+        repository.deleteTaskItem(taskItem)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

@@ -21,6 +21,7 @@ private val clickListener: ExpenseItemClickListener) :
     override fun onBindViewHolder(holder: ExpenseItemViewHolder, position: Int) {
         val currentExpense = expenseList[position]
         holder.bindExpenseItem(currentExpense)
+
     }
 
     override fun getItemCount(): Int {

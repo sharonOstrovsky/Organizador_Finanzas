@@ -1,5 +1,6 @@
 package com.example.organizador.ui.views
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,16 +9,20 @@ import androidx.annotation.RequiresApi
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.organizador.OrganizadorApplication
+import com.example.organizador.R
 import com.example.organizador.adapter.TaskItemAdapter
 import com.example.organizador.databinding.ActivityToDoListBinding
 import com.example.organizador.data.model.TaskItem
 import com.example.organizador.data.model.TaskItemClickListener
 import com.example.organizador.ui.viewmodel.TaskItemModelFactory
 import com.example.organizador.ui.viewmodel.TaskViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ToDoListActivity : AppCompatActivity(), TaskItemClickListener {
 
     private lateinit var binding: ActivityToDoListBinding
+    private lateinit var bottomNavigationView: BottomNavigationView
+
     private val taskViewModel: TaskViewModel by viewModels {
         TaskItemModelFactory((application as OrganizadorApplication).repository)
     }
@@ -33,6 +38,36 @@ class ToDoListActivity : AppCompatActivity(), TaskItemClickListener {
 
         setRecyclerView()
 
+        bottonNavigation()
+
+    }
+
+    fun bottonNavigation(){
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.selectedItemId = R.id.todo
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.expense -> {
+                    redirectGastos()
+                    true
+                }
+                R.id.todo -> {
+                    redirectToDo()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+    fun redirectGastos(){
+        val intent = Intent(this, GastosActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun redirectToDo(){
+        val intent = Intent(this, ToDoListActivity::class.java)
+        startActivity(intent)
     }
 
     private fun setRecyclerView() {
@@ -52,6 +87,10 @@ class ToDoListActivity : AppCompatActivity(), TaskItemClickListener {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun completeTaskItem(taskItem: TaskItem) {
         taskViewModel.setCompleted(taskItem)
+    }
+
+    override fun deleteTaskItem(taskItem: TaskItem) {
+        taskViewModel.deleteTaskItem(taskItem)
     }
 
 

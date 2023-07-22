@@ -5,7 +5,9 @@ import com.example.organizador.TaskItemDao
 import com.example.organizador.data.model.ExpenseItem
 import com.example.organizador.data.model.TaskItem
 import com.example.organizador.database.ExpenseItemDao
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 
 class OrganizadorRepository(
     private val taskItemDao: TaskItemDao,
@@ -13,6 +15,7 @@ class OrganizadorRepository(
 ) {
     val allTaskItem: Flow<List<TaskItem>> = taskItemDao.allTaskItems()
     val allExpenseItem: Flow<List<ExpenseItem>> = expenseItemDao.allExpensesItems()
+
 
     @WorkerThread
     suspend fun insertTaskItem(taskItem: TaskItem){
@@ -25,6 +28,11 @@ class OrganizadorRepository(
     }
 
     @WorkerThread
+    suspend fun deleteTaskItem(taskItem: TaskItem){
+        taskItemDao.deleteTaskItem(taskItem)
+    }
+
+    @WorkerThread
     suspend fun insertExpenseItem(expenseItem: ExpenseItem){
         expenseItemDao.insertExpenseItem(expenseItem)
     }
@@ -32,5 +40,15 @@ class OrganizadorRepository(
     @WorkerThread
     suspend fun updateExpenseItem(expenseItem: ExpenseItem){
         expenseItemDao.updateExpenseItem(expenseItem)
+    }
+
+    @WorkerThread
+    suspend fun deleteExpenseItem(expenseItem: ExpenseItem){
+        expenseItemDao.deleteExpenseItem(expenseItem)
+    }
+
+    suspend fun getTotalPrice(): Double = withContext(Dispatchers.IO) {
+        println("aaaaaaa ${expenseItemDao.getTotalPrice()}")
+        expenseItemDao.getTotalPrice()
     }
 }

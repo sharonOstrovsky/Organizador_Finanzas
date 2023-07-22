@@ -15,5 +15,8 @@ interface ExpenseItemDao {
     suspend fun updateExpenseItem(expenseItem: ExpenseItem)
     @Delete
     suspend fun deleteExpenseItem(expenseItem: ExpenseItem)
+    @Query("SELECT SUM(price) FROM expense_item_table")
+    fun getTotalPrice():Double
+
 }
 

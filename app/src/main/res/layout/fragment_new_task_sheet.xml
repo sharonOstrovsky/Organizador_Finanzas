@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".ui.views.NewTaskSheet">
 
 
     <TextView
         android:id="@+id/taskTitle"
+        style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Task"
-        android:textSize="30sp"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        style="@style/TextAppearance.AppCompat.Title"/>
+        android:layout_marginTop="20dp"
+        android:text="New Task"
+        android:textSize="30sp" />
 
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="20dp">
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/name"
-            android:hint="Name"/>
+            android:hint="Name" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,18 +37,27 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="20dp">
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/desc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/desc"
-            android:hint="Description">
+            android:hint="Price"
+            android:inputType="numberDecimal">
 
         </com.google.android.material.textfield.TextInputEditText>
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/datePickerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="20dp"
+        android:text="Select Date" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/timePickerButton"
@@ -57,7 +65,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="20dp"
-        android:text="Select Time"/>
+        android:text="Select Time" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveButton"
@@ -66,7 +75,7 @@
         android:layout_gravity="center"
         android:layout_marginHorizontal="20dp"
         android:backgroundTint="?attr/colorPrimary"
-        android:textColor="?colorOnPrimary"
-        android:text="Save"/>
+        android:text="Save"
+        android:textColor="?colorOnPrimary" />
 
 </LinearLayout>

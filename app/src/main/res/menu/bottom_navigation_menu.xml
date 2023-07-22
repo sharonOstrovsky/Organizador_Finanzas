@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/expense"
+        android:icon="@drawable/expense_icon"
+        android:title="Expense" />
+    <item
+        android:id="@+id/todo"
+        android:icon="@drawable/todo_list_icon"
+        android:title="ToDoList" />
+</menu>

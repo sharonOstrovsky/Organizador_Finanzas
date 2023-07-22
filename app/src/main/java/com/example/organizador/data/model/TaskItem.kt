@@ -18,6 +18,7 @@ class TaskItem (
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "desc") var desc: String,
     @ColumnInfo(name = "dueTimeString") var dueTimeString: String?,
+    @ColumnInfo(name = "dueDateString") var dueDateString: String?,
     @ColumnInfo(name = "completeDateString") var completeDateString: String?,
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 ){
@@ -25,6 +26,8 @@ class TaskItem (
     fun completedDate(): LocalDate? = if (completeDateString == null) null else LocalDate.parse(completeDateString, dateFormatter)
     @RequiresApi(Build.VERSION_CODES.O)
     fun dueTime(): LocalTime? = if (dueTimeString == null) null else LocalTime.parse(dueTimeString, timeFormatter)
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun dueDate(): LocalDate? = if (dueDateString == null) null else LocalDate.parse(dueDateString, dateFormatter)
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun isCompleted() = completedDate() != null

@@ -45,6 +45,18 @@
             android:layout_marginHorizontal="5dp"
             android:text="Precio" />
 
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="15dp"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="checkBox"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:src="@drawable/delete" />
+
     </LinearLayout>
 
 

@@ -5,11 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.organizador.TaskItemDao
-import com.example.organizador.TaskItemDataBase
 import com.example.organizador.data.model.ExpenseItem
 import com.example.organizador.data.model.TaskItem
 
-@Database(entities = [TaskItem::class, ExpenseItem::class], version = 1, exportSchema = false)
+@Database(entities = [TaskItem::class, ExpenseItem::class], version = 2, exportSchema = false)
 abstract class OrganizadorDataBase: RoomDatabase() {
 
     abstract fun expenseItemDao(): ExpenseItemDao
@@ -27,7 +26,8 @@ abstract class OrganizadorDataBase: RoomDatabase() {
                     context.applicationContext,
                     OrganizadorDataBase::class.java,
                     "organizador_item_database"
-                ).build()
+                ).fallbackToDestructiveMigration() // Permite migraciones destructivas
+                    .build()
                 INSTANCE = instance
                 instance
             }

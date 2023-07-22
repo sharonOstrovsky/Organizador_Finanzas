@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.organizador.databinding.FragmentNewExpenseBinding
 import com.example.organizador.data.model.ExpenseItem
+import com.example.organizador.data.network.OrganizadorRepository
 import com.example.organizador.ui.viewmodel.ExpenseViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.launch
 
 class NewExpense(var expenseItem: ExpenseItem?) : BottomSheetDialogFragment(){
 
@@ -44,7 +47,6 @@ class NewExpense(var expenseItem: ExpenseItem?) : BottomSheetDialogFragment(){
         binding.saveButton.setOnClickListener {
             println(binding.descriptionEditText.text)
             saveAcction()
-
         }
 
 
@@ -54,20 +56,24 @@ class NewExpense(var expenseItem: ExpenseItem?) : BottomSheetDialogFragment(){
         val description = binding.descriptionEditText.text.toString()
         val price = binding.priceEditText.text.toString().toDouble()
 
-
         if(expenseItem == null){
             val newExpense = ExpenseItem(description, price)
             expenseViewModel.addExpenseItem(newExpense)
-
         }else{
             expenseItem!!.description = description
             expenseItem!!.price = price
             expenseViewModel.updateExpenseItem(expenseItem!!)
         }
+        lifecycleScope.launch {
+            expenseViewModel.updateTotalPrice()
+        }
+
         binding.descriptionEditText.setText("")
         binding.priceEditText.setText("")
+
         dismiss()
     }
+
 
 
 }

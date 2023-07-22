@@ -24,6 +24,10 @@ class ExpenseItemViewHolder(
         binding.expenseCellContainer.setOnClickListener {
             clickListener.editExpenseItem(expenseItem)
         }
+        binding.deleteButton.setOnClickListener {
+            clickListener.deleteExpenseItem(expenseItem)
+        }
 
     }
 }
+
