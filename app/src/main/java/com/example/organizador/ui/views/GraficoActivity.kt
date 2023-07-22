@@ -64,11 +64,6 @@ class GraficoActivity : AppCompatActivity() {
             }
         }
 
-
-
-
-
-
     }
 
     fun income(){
@@ -76,32 +71,17 @@ class GraficoActivity : AppCompatActivity() {
         binding.ingreso.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // Este método se invoca antes de que el texto cambie
-                //prefs.saveIncome(s.toString())
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 // Este método se invoca mientras el texto cambia
-                //prefs.saveIncome(s.toString())
             }
 
             override fun afterTextChanged(s: Editable?) {
                 // Este método se invoca después de que el texto cambie
-                //val texto = s.toString()
-                // Aquí puedes realizar acciones basadas en el texto ingresado o cambiado
-                // por ejemplo, puedes validar el texto, guardar los cambios, etc.
-
-                //prefs.saveIncome(s.toString())
-                //graficar()
-
                 handler.removeCallbacks(runnable)
-
-                // Ejecutar la acción después de un retraso (por ejemplo, 1 segundo)
+                // Ejecutar la acción después de un retraso (por ejemplo, 2 segundos)
                 handler.postDelayed(runnable, 2000)
-
-                //prefs.saveIncome(s.toString())
-                //pieGraph.removeSlices()
-                //graficar()
-
             }
         })
 
