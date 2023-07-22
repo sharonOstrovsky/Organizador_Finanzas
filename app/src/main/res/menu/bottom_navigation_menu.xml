@@ -9,4 +9,8 @@
         android:id="@+id/todo"
         android:icon="@drawable/todo_list_icon"
         android:title="ToDoList" />
+    <item
+        android:id="@+id/graphPie"
+        android:icon="@drawable/pie_chart"
+        android:title="Grafico" />
 </menu>
