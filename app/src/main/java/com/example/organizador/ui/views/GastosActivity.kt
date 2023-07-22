@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.organizador.OrganizadorApplication
+import com.example.organizador.OrganizadorApplication.Companion.prefs
 import com.example.organizador.R
 import com.example.organizador.adapter.ExpenseAdapter
 import com.example.organizador.data.model.ExpenseItem
@@ -42,16 +43,13 @@ class GastosActivity : AppCompatActivity(), ExpenseItemClickListener {
         }
 
         setRecyclerView()
-        //getPrice()
-
 
         bottonNavigation()
-
-
 
         expenseViewModel.totalPriceLiveData.observe(this) { totalPrice ->
             binding.price.text =
                 totalPrice.toString()
+            prefs.saveTotalExpense(totalPrice.toString())
         }
 
         lifecycleScope.launch {
@@ -66,12 +64,12 @@ class GastosActivity : AppCompatActivity(), ExpenseItemClickListener {
         bottomNavigationView.selectedItemId = R.id.expense
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.expense -> {
-                    redirectGastos()
-                    true
-                }
                 R.id.todo -> {
                     redirectToDo()
+                    true
+                }
+                R.id.graphPie ->{
+                    redirectGrafico()
                     true
                 }
                 else -> false
@@ -79,7 +77,10 @@ class GastosActivity : AppCompatActivity(), ExpenseItemClickListener {
         }
     }
 
-
+    fun redirectGrafico(){
+        val intent = Intent(this, GraficoActivity::class.java)
+        startActivity(intent)
+    }
     fun redirectGastos(){
         val intent = Intent(this, GastosActivity::class.java)
         startActivity(intent)

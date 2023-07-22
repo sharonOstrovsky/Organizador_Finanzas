@@ -1,6 +1,7 @@
 package com.example.organizador.ui.viewmodel
 
 import androidx.lifecycle.*
+import com.example.organizador.OrganizadorApplication.Companion.prefs
 import com.example.organizador.data.model.ExpenseItem
 import com.example.organizador.data.network.OrganizadorRepository
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,7 @@ class ExpenseViewModel(
             repository.getTotalPrice()
         }
         _totalPriceLiveData.value = totalPrice
+        prefs.saveTotalExpense(totalPrice.toString())
 
     }
 

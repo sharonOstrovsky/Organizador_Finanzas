@@ -29,6 +29,8 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="text"
+            android:imeOptions="actionDone"
             android:hint="Name" />
 
     </com.google.android.material.textfield.TextInputLayout>

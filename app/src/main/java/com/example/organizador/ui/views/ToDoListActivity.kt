@@ -52,19 +52,23 @@ class ToDoListActivity : AppCompatActivity(), TaskItemClickListener {
                     redirectGastos()
                     true
                 }
-                R.id.todo -> {
-                    redirectToDo()
+                R.id.graphPie ->{
+                    redirectGrafico()
                     true
                 }
                 else -> false
             }
         }
     }
+
+    fun redirectGrafico(){
+        val intent = Intent(this, GraficoActivity::class.java)
+        startActivity(intent)
+    }
     fun redirectGastos(){
         val intent = Intent(this, GastosActivity::class.java)
         startActivity(intent)
     }
-
     fun redirectToDo(){
         val intent = Intent(this, ToDoListActivity::class.java)
         startActivity(intent)

@@ -17,13 +17,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.GastosButton.setOnClickListener {
-            redirectGastos()
-        }
-        binding.ToDoButton.setOnClickListener {
-            redirectToDo()
-        }
-
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
