@@ -1,5 +1,8 @@
 package com.example.organizador.ui.views
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +20,7 @@ import com.example.organizador.data.model.TaskItemClickListener
 import com.example.organizador.ui.viewmodel.TaskItemModelFactory
 import com.example.organizador.ui.viewmodel.TaskViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 class ToDoListActivity : AppCompatActivity(), TaskItemClickListener {
 
@@ -25,6 +29,10 @@ class ToDoListActivity : AppCompatActivity(), TaskItemClickListener {
 
     private val taskViewModel: TaskViewModel by viewModels {
         TaskItemModelFactory((application as OrganizadorApplication).repository)
+    }
+
+    companion object{
+        const val MY_CHANNEL_ID = "myChannel"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +47,7 @@ class ToDoListActivity : AppCompatActivity(), TaskItemClickListener {
         setRecyclerView()
 
         bottonNavigation()
+
 
     }
 
@@ -96,6 +105,8 @@ class ToDoListActivity : AppCompatActivity(), TaskItemClickListener {
     override fun deleteTaskItem(taskItem: TaskItem) {
         taskViewModel.deleteTaskItem(taskItem)
     }
+
+
 
 
 }

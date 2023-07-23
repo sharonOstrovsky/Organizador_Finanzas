@@ -1,7 +1,8 @@
 package com.example.organizador.ui.views
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
+import android.app.*
+import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -13,9 +14,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.organizador.databinding.FragmentNewTaskSheetBinding
 import com.example.organizador.data.model.TaskItem
 import com.example.organizador.ui.viewmodel.TaskViewModel
+import com.example.organizador.ui.views.ToDoListActivity.Companion.MY_CHANNEL_ID
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalDate
 import java.time.LocalTime
+import java.util.*
+import kotlin.random.Random
 
 class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment()
 {
@@ -28,6 +32,8 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity = requireActivity()
+
+        createChannel()
 
         if (taskItem != null)
         {
@@ -131,11 +137,68 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment()
             taskItem!!.dueDateString = dueDateString
             taskViewModel.updateTaskItem(taskItem!!)
         }
+        if(dueDate != null  && dueTime != null){
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.YEAR, dueDate!!.year)
+            calendar.set(Calendar.MONTH, dueDate!!.monthValue - 1) // Ajuste para el valor correcto del mes
+            calendar.set(Calendar.DAY_OF_MONTH, dueDate!!.dayOfMonth)
+            calendar.set(Calendar.HOUR_OF_DAY, dueTime!!.hour)
+            calendar.set(Calendar.MINUTE, dueTime!!.minute)
+            calendar.set(Calendar.SECOND, 0)
+            calendar.set(Calendar.MILLISECOND, 0)
+
+            scheduleNotification(calendar.timeInMillis, taskItem)
+        }
+
 
         //id: Int?, name: String, desc: String, dueTime: LocalTime?
         binding.name.setText("")
         binding.desc.setText("")
         dismiss()
     }
+
+    private fun createChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val channel = NotificationChannel(
+                MY_CHANNEL_ID,
+                "MyChannel",
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = "ORGANIZADOR"
+            }
+            val notificationManager: NotificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun scheduleNotification(timeInMillis: Long, taskItem: TaskItem?) {
+        val alarmId = generateAlarmIdForItem(taskItem)
+
+        val intent = Intent(requireContext(), AlarmNotification::class.java)
+        intent.putExtra("id", alarmId)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext(),
+            alarmId,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent)
+        } else {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeInMillis, pendingIntent)
+        }
+    }
+
+    private fun generateAlarmIdForItem(taskItem: TaskItem?): Int {
+        return Random(1000).nextInt()
+    }
+
+
+
 
 }
