@@ -73,6 +73,7 @@ dependencies {
 
     implementation 'org.quanqi:android-holo-graph:0.1.0'
 
+    implementation 'androidx.biometric:biometric-ktx:1.2.0-alpha05'
 
 
 

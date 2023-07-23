@@ -10,11 +10,11 @@
         android:id="@+id/layoutIngresos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_alignParentTop="true"
-        >
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Ingreso"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
