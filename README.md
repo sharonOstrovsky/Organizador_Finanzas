@@ -23,37 +23,37 @@ estadísticos.
 <table>
   <tr>
     <td align="center">
-      <img src="app/src/main/res/drawable/inicio_light.jpeg" alt="Inicio sesion modo light" width="100" height="300">
+      <img src="app/src/main/res/drawable/inicio_light.jpeg" alt="Inicio sesion modo light" width="200" height="300">
     </td>
     <td align="center">
-      <img src="app/src/main/res/drawable/inicio_dark.jpeg" alt="Inicio sesion modo dark" width="100" height="300">
-    </td>
-  </tr>
-
-  <tr>
-    <td align="center">
-      <img src="app/src/main/res/drawable/gastos_light.jpeg" alt="Gastos modo light" width="100" height="300">
-    </td>
-    <td align="center">
-      <img src="app/src/main/res/drawable/gastos_dark.jpeg" alt="Gastos modo dark" width="100" height="300">
+      <img src="app/src/main/res/drawable/inicio_dark.jpeg" alt="Inicio sesion modo dark" width="200" height="300">
     </td>
   </tr>
 
   <tr>
     <td align="center">
-      <img src="app/src/main/res/drawable/list_light.jpeg" alt="ToDo List modo light" width="100" height="300">
+      <img src="app/src/main/res/drawable/gastos_light.jpeg" alt="Gastos modo light" width="200" height="300">
     </td>
     <td align="center">
-      <img src="app/src/main/res/drawable/list_dark.jpeg" alt="ToDo List modo dark" width="100" height="300">
+      <img src="app/src/main/res/drawable/gastos_dark.jpeg" alt="Gastos modo dark" width="200" height="300">
     </td>
   </tr>
 
   <tr>
     <td align="center">
-      <img src="app/src/main/res/drawable/grafico_light.jpeg" alt="Grafico modo light" width="100" height="300">
+      <img src="app/src/main/res/drawable/list_light.jpeg" alt="ToDo List modo light" width="200" height="300">
     </td>
     <td align="center">
-      <img src="app/src/main/res/drawable/grafico_dark.jpeg" alt="Grafico modo dark" width="100" height="300">
+      <img src="app/src/main/res/drawable/list_dark.jpeg" alt="ToDo List modo dark" width="200" height="300">
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="app/src/main/res/drawable/grafico_light.jpeg" alt="Grafico modo light" width="200" height="300">
+    </td>
+    <td align="center">
+      <img src="app/src/main/res/drawable/grafico_dark.jpeg" alt="Grafico modo dark" width="200" height="300">
     </td>
   </tr>
 </table>
