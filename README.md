@@ -22,11 +22,9 @@ estadísticos.
 
 <table>
   <tr>
-    <td align="center">
-      ![inicio modo light](..\src\main\res\drawable\inicio_light.jpeg)
+    <td align="center">![](app/src/main/res/drawable/inicio_light.jpeg)
     </td>
-    <td align="center">
-      ![](../../../../res/drawable/inicio_dark.jpeg)
+    <td align="center">![](app/src/main/res/drawable/inicio_dark.jpeg)
     </td>
   </tr>
 
