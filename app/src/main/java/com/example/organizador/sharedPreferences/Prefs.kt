@@ -26,4 +26,11 @@ class Prefs(val context: Context) {
         return storage.getString("totalExpense", "")!!
     }
 
+    fun saveNotificationId(notificationId : Int){
+        storage.edit().putInt("notification", notificationId).apply()
+    }
+    fun getNotificationId() : Int {
+        return storage.getInt("notification", 0)
+    }
+
 }

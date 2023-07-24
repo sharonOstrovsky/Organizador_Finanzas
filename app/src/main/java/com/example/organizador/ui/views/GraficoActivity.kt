@@ -9,7 +9,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Switch
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.echo.holographlibrary.PieGraph
@@ -31,6 +35,8 @@ class GraficoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGraficoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.title = "Grafico"
 
         bottonNavigation()
         pieGraph = findViewById<PieGraph>(R.id.graphPie)
@@ -117,6 +123,11 @@ class GraficoActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun redirectMain(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
     fun graficar(){
         val slice = PieSlice()
         var hex = generarColorHexAleatorio()
@@ -171,5 +182,45 @@ class GraficoActivity : AppCompatActivity() {
         val g = (0..255).random()
         val b = (0..255).random()
         return String.format("#%02x%02x%02x", r, g, b)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.options, menu)
+
+
+        val darkModeMenuItem = menu?.findItem(R.id.mode_switch)
+
+        val darkModeSwitch = darkModeMenuItem?.actionView as Switch
+
+        // Establecer el listener para cambiar el modo cuando se mueva el interruptor
+        darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                enableDarkMode()
+            }else{
+                disableDarkMode()
+            }
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout -> {
+                redirectMain()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    private fun enableDarkMode(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        delegate.applyDayNight()
+    }
+
+    private fun disableDarkMode(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        delegate.applyDayNight()
     }
 }

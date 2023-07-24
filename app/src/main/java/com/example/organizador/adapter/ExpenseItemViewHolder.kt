@@ -14,7 +14,6 @@ class ExpenseItemViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bindExpenseItem(expenseItem: ExpenseItem){
-        println("ACA ${ expenseItem.description }")
         binding.descriptionTextView.text = expenseItem.description
         binding.priceTextView.text = expenseItem.price.toString()
 

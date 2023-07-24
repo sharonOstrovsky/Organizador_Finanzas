@@ -11,9 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
+import com.example.organizador.OrganizadorApplication.Companion.prefs
 import com.example.organizador.databinding.FragmentNewTaskSheetBinding
 import com.example.organizador.data.model.TaskItem
 import com.example.organizador.ui.viewmodel.TaskViewModel
+import com.example.organizador.ui.views.AlarmNotification.Companion.NOTIFICATION_ID
 import com.example.organizador.ui.views.ToDoListActivity.Companion.MY_CHANNEL_ID
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalDate
@@ -147,7 +149,7 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment()
             calendar.set(Calendar.SECOND, 0)
             calendar.set(Calendar.MILLISECOND, 0)
 
-            scheduleNotification(calendar.timeInMillis, taskItem)
+            scheduleNotification(calendar.timeInMillis)
         }
 
 
@@ -172,18 +174,19 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment()
         }
     }
 
-    private fun scheduleNotification(timeInMillis: Long, taskItem: TaskItem?) {
-        val alarmId = generateAlarmIdForItem(taskItem)
+    private fun scheduleNotification(timeInMillis: Long) {
 
         val intent = Intent(requireContext(), AlarmNotification::class.java)
-        intent.putExtra("id", alarmId)
 
         val pendingIntent = PendingIntent.getBroadcast(
             requireContext(),
-            alarmId,
+            NOTIFICATION_ID,
             intent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
+        println("NOTIFICATION: $NOTIFICATION_ID")
+        NOTIFICATION_ID++
+        prefs.saveNotificationId(NOTIFICATION_ID)
 
         val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -194,9 +197,6 @@ class NewTaskSheet(var taskItem: TaskItem?) : BottomSheetDialogFragment()
         }
     }
 
-    private fun generateAlarmIdForItem(taskItem: TaskItem?): Int {
-        return Random(1000).nextInt()
-    }
 
 
 

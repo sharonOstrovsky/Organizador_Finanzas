@@ -7,8 +7,12 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Switch
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatDelegate
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.organizador.OrganizadorApplication
@@ -39,6 +43,8 @@ class ToDoListActivity : AppCompatActivity(), TaskItemClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityToDoListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.title = "ToDo List"
 
         binding.newTaskButton.setOnClickListener{
             NewTaskSheet(null).show(supportFragmentManager, "newTaskTag")
@@ -82,6 +88,10 @@ class ToDoListActivity : AppCompatActivity(), TaskItemClickListener {
         val intent = Intent(this, ToDoListActivity::class.java)
         startActivity(intent)
     }
+    fun redirectMain(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 
     private fun setRecyclerView() {
         val toDoActivity = this
@@ -107,6 +117,45 @@ class ToDoListActivity : AppCompatActivity(), TaskItemClickListener {
     }
 
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.options, menu)
+
+
+        val darkModeMenuItem = menu?.findItem(R.id.mode_switch)
+
+        val darkModeSwitch = darkModeMenuItem?.actionView as Switch
+
+        // Establecer el listener para cambiar el modo cuando se mueva el interruptor
+        darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                enableDarkMode()
+            }else{
+                disableDarkMode()
+            }
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout -> {
+                redirectMain()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    private fun enableDarkMode(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        delegate.applyDayNight()
+    }
+
+    private fun disableDarkMode(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        delegate.applyDayNight()
+    }
 
 
 }

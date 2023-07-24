@@ -8,14 +8,17 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.example.organizador.OrganizadorApplication.Companion.prefs
 import com.example.organizador.R
 
 class AlarmNotification : BroadcastReceiver() {
 
-    var NOTIFICATION_ID = 0
+    companion object{
+        var NOTIFICATION_ID = prefs.getNotificationId()
+    }
+
 
     override fun onReceive(context: Context, p1: Intent?) {
-        NOTIFICATION_ID = p1?.getIntExtra("id", 0) ?: 0
         createAlarmNotification(context)
     }
 

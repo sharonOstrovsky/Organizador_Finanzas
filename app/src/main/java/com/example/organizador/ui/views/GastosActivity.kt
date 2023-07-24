@@ -1,10 +1,18 @@
 package com.example.organizador.ui.views
 
 
+import android.app.UiModeManager
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Switch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.organizador.OrganizadorApplication
@@ -27,6 +35,8 @@ class GastosActivity : AppCompatActivity(), ExpenseItemClickListener {
 
     private lateinit var bottomNavigationView: BottomNavigationView
 
+    private var isDarkModeEnabled = false
+
 
     private val expenseViewModel: ExpenseViewModel by viewModels {
         ExpenseItemModelFactory((application as OrganizadorApplication).repository)
@@ -36,6 +46,8 @@ class GastosActivity : AppCompatActivity(), ExpenseItemClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityGastosBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.title = "Gastos"
 
 
         binding.addButton.setOnClickListener {
@@ -89,6 +101,10 @@ class GastosActivity : AppCompatActivity(), ExpenseItemClickListener {
         val intent = Intent(this, ToDoListActivity::class.java)
         startActivity(intent)
     }
+    fun redirectMain(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 
     fun getPrice() {
         lifecycleScope.launch {
@@ -122,6 +138,52 @@ class GastosActivity : AppCompatActivity(), ExpenseItemClickListener {
             expenseViewModel.updateTotalPrice()
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.options, menu)
+
+
+        val darkModeMenuItem = menu?.findItem(R.id.mode_switch)
+        val darkModeSwitch = darkModeMenuItem?.actionView as Switch
+
+        // Establecer el estado inicial del interruptor según el modo actual
+        darkModeSwitch.isChecked = isDarkModeEnabled
+
+        darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            // Verificar si el modo oscuro ha cambiado
+            if (isChecked != isDarkModeEnabled) {
+                isDarkModeEnabled = isChecked
+                if (isChecked) {
+                    enableDarkMode()
+                } else {
+                    disableDarkMode()
+                }
+            }
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout -> {
+                redirectMain()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    private fun enableDarkMode(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        delegate.applyDayNight()
+    }
+
+    private fun disableDarkMode(){
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        delegate.applyDayNight()
+    }
+
 
 
 

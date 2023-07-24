@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.views.MainActivity">
+
 
     <LinearLayout
         android:id="@+id/layoutMode"
@@ -26,14 +28,40 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layoutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:paddingVertical="0dp"
+        android:paddingHorizontal="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/layoutFingerprint"
+        app:layout_constraintTop_toBottomOf="@id/layoutMode">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="50dp"
+            android:textStyle="bold">
+
+        </androidx.appcompat.widget.AppCompatTextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutFingerprint"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutMode"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         >
+
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivFingerPrint"
             android:layout_width="100dp"

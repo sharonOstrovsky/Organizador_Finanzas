@@ -15,7 +15,7 @@ import com.example.organizador.ui.viewmodel.ExpenseViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.launch
 
-class NewExpense(var expenseItem: ExpenseItem?) : BottomSheetDialogFragment(){
+class NewExpense(var expenseItem: ExpenseItem?) : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentNewExpenseBinding
     private lateinit var expenseViewModel: ExpenseViewModel
@@ -34,33 +34,37 @@ class NewExpense(var expenseItem: ExpenseItem?) : BottomSheetDialogFragment(){
         super.onViewCreated(view, savedInstanceState)
         val activity = requireActivity()
 
-        if(expenseItem != null){
+        if (expenseItem != null) {
             binding.expenseTitle.text = "Edit Expense"
             val editable = Editable.Factory.getInstance()
             binding.descriptionEditText.text = editable.newEditable(expenseItem!!.description)
             binding.priceEditText.text = editable.newEditable(expenseItem!!.price.toString())
 
-        }else{
+        } else {
             binding.expenseTitle.text = "New Expense"
         }
 
         expenseViewModel = ViewModelProvider(activity).get(ExpenseViewModel::class.java)
         binding.saveButton.setOnClickListener {
-            println(binding.descriptionEditText.text)
             saveAcction()
         }
 
 
     }
 
-    private fun saveAcction(){
+    private fun saveAcction() {
         val description = binding.descriptionEditText.text.toString()
-        val price = binding.priceEditText.text.toString().toDouble()
+        val priceText = binding.priceEditText.text.toString()
+        val price = if (priceText.isNotEmpty()) {
+            priceText.toDouble()
+        } else {
+            0.0
+        }
 
-        if(expenseItem == null){
+        if (expenseItem == null) {
             val newExpense = ExpenseItem(description, price)
             expenseViewModel.addExpenseItem(newExpense)
-        }else{
+        } else {
             expenseItem!!.description = description
             expenseItem!!.price = price
             expenseViewModel.updateExpenseItem(expenseItem!!)
@@ -74,7 +78,6 @@ class NewExpense(var expenseItem: ExpenseItem?) : BottomSheetDialogFragment(){
 
         dismiss()
     }
-
 
 
 }
