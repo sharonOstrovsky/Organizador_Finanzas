@@ -23,36 +23,37 @@ estadísticos.
 <table>
   <tr>
     <td align="center">
-      <img src="app/src/main/res/drawable/inicio_light.jpeg" alt="inicio sesion modo light" width="300" height="200">
+      <img src="app/src/main/res/drawable/inicio_light.jpeg" alt="Inicio sesion modo light" width="100" height="300">
     </td>
-    <td align="center">![](app/src/main/res/drawable/inicio_dark.jpeg)
+    <td align="center">
+      <img src="app/src/main/res/drawable/inicio_dark.jpeg" alt="Inicio sesion modo dark" width="100" height="300">
     </td>
   </tr>
 
   <tr>
     <td align="center">
-      ![](../../../../res/drawable/gastos_light.jpeg)
+      <img src="app/src/main/res/drawable/gastos_light.jpeg" alt="Gastos modo light" width="100" height="300">
     </td>
     <td align="center">
-      ![](../../../../res/drawable/gastos_dark.jpeg)
-    </td>
-  </tr>
-
-  <tr>
-    <td align="center">
-      ![](../../../../res/drawable/list_light.jpeg)
-    </td>
-    <td align="center">
-      ![](../../../../res/drawable/list_dark.jpeg)
+      <img src="app/src/main/res/drawable/gastos_dark.jpeg" alt="Gastos modo dark" width="100" height="300">
     </td>
   </tr>
 
   <tr>
     <td align="center">
-      ![](../../../../res/drawable/grafico_light.jpeg)
+      <img src="app/src/main/res/drawable/list_light.jpeg" alt="ToDo List modo light" width="100" height="300">
     </td>
     <td align="center">
-      ![](../../../../res/drawable/grafico_dark.jpeg)
+      <img src="app/src/main/res/drawable/list_dark.jpeg" alt="ToDo List modo dark" width="100" height="300">
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="app/src/main/res/drawable/grafico_light.jpeg" alt="Grafico modo light" width="100" height="300">
+    </td>
+    <td align="center">
+      <img src="app/src/main/res/drawable/grafico_dark.jpeg" alt="Grafico modo dark" width="100" height="300">
     </td>
   </tr>
 </table>
