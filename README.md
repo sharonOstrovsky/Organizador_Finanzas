@@ -22,7 +22,8 @@ estadísticos.
 
 <table>
   <tr>
-    <td align="center">![](app/src/main/res/drawable/inicio_light.jpeg)
+    <td align="center">
+      <img src="app/src/main/res/drawable/inicio_light.jpeg" alt="inicio sesion modo light" width="300" height="200">
     </td>
     <td align="center">![](app/src/main/res/drawable/inicio_dark.jpeg)
     </td>
