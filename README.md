@@ -23,7 +23,7 @@ estadísticos.
 <table>
   <tr>
     <td align="center">
-      ![](../../../../res/drawable/inicio_light.jpeg)
+      ![inicio modo light](..\src\main\res\drawable\inicio_light.jpeg)
     </td>
     <td align="center">
       ![](../../../../res/drawable/inicio_dark.jpeg)
