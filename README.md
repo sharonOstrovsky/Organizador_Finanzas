@@ -20,7 +20,7 @@ estadísticos.
 
 ## Capturas de pantalla
 
-<table>
+<table align="center">
   <tr>
     <td align="center">
       <img src="app/src/main/res/drawable/inicio_light.jpeg" alt="Inicio sesion modo light" width="200" height="350">
